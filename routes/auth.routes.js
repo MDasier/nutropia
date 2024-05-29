@@ -100,9 +100,10 @@ router.get("/pacientes", isTokenValid, async (req,res) => {
   try {
     const resp = await User.findById(req.payload._id)
     //console.log(resp)
-    if(resp.role==="paciente"){
-      const resp2 = await User.find()
-      res.json(resp2)
+    if(resp.role==="nutri"){
+      //!CUANDO SEA NUTRI BUSCAR LOS PACIENTES ASOCIADOS
+      //const resp2 = await User.find()
+      //res.json(resp2)
     }
     
   } catch (error) {
