@@ -2,6 +2,8 @@ const Citas = require("../models/Citas.model");
 const router = require("express").Router();
 const { isTokenValid } = require("../middlewares/auth.middlewares.js")
 
+
+//GET "/api/citas"=> Listado de citas
 router.get("/", isTokenValid, async (req,res,next) => {
     try {
       const resp = await Citas.find()
@@ -12,4 +14,5 @@ router.get("/", isTokenValid, async (req,res,next) => {
       next(error)
     }
 })
+
 module.exports = router;

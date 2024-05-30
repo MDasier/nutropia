@@ -5,8 +5,14 @@ router.get("/", (req, res, next) => {
 const authRouter = require("./auth.routes.js")
 router.use("/auth", authRouter)//rutas para registro, login y verificacion
 
-const foodRouter = require("./food.routes.js")
-router.use("/alimento", foodRouter)//ruta para la colecion de alimentos
+const perfilRouter = require("./perfil.routes.js")
+router.use("/perfil", perfilRouter)//rutas para perfiles (c-R-U-d)
+
+const usersRouter = require("./users.routes.js")
+router.use("/usuarios", usersRouter)//rutas para perfiles (c-R-U-d)
+
+const alimentoRouter = require("./alimentos.routes.js")
+router.use("/alimentos", alimentoRouter)//ruta para la colecion de alimentos
 
 const planesRouter = require("./planes.routes.js")
 router.use("/plan-nutricional", planesRouter)//rutas para los planes nutricionales

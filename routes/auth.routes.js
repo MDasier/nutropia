@@ -82,55 +82,18 @@ router.post("/login", async (req, res, next) => {
 
 // GET "/api/auth/verify" =>
 router.get("/verify", isTokenValid, (req, res, next) => {
-  console.log(req.payload) // usuario
+  //console.log(req.payload) // usuario
   res.status(200).json({payload: req.payload})
 })
 
-// GET "/api/auth/perfil" => Obtener los datos del perfil
-router.get("/perfil/:userId", isTokenValid, async (req,res) => {
-  try {
-    const resp = await User.findById(req.payload._id)
-    //console.log(resp)
-    res.json(resp)
-  } catch (error) {
-    next(error)
-  }
-})
 
-// PATCH "/api/auth/perfil/editar"
-router.patch("/perfil/:userId", isTokenValid, async (req,res) => {
-  try {
-    await User.findByIdAndUpdate(req.payload._id, {
-      email: req.body.email,
-      username: req.body.username
-      /*password: req.body.password*/
-    })
-    res.sendStatus(200)
-  } catch (error) {
-    next(error)
-  }
-})
 
-// PATCH "/api/auth/perfil/editar"
-router.patch("/perfil/:userId/foto-perfil", isTokenValid, async (req,res) => {
-  try {
-    await User.findByIdAndUpdate(req.payload._id, {
-      imageUrl: req.body.imageUrl
-    })
-    res.sendStatus(200)
-  } catch (error) {
-    next(error)
-  }
-})
 // GET "/api/auth/pacientes" =>
-router.get("/pacientes", isTokenValid, async (req,res) => {
+router.get("/pacientes", isTokenValid, async (req,res,next) => {
   try {
-    const resp = await User.findById(req.payload._id)
-    //console.log(resp)
-    if(resp.role==="nutri"){
-      //!CUANDO SEA NUTRI BUSCAR LOS PACIENTES ASOCIADOS
-      //const resp2 = await User.find()
-      //res.json(resp2)
+    if(req.payload.role==="nutri"){ 
+      const listaPacientes = await User.find({nutricionista:req.payload._id,role:"paciente"})
+      res.json(listaPacientes)
     }
     
   } catch (error) {

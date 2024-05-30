@@ -20,9 +20,13 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['paciente','nutri','admin'],
+      enum: ['paciente','nutri','admin','invitado'],
       lowercase: true,
-      default: "paciente"
+      default: "invitado"
+    },
+    nutricionista:{
+      type: Schema.Types.ObjectId, 
+      ref:"User"
     },
     imageUrl: {
       type: String
