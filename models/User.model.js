@@ -23,6 +23,9 @@ const userSchema = new Schema(
       enum: ['paciente','nutri','admin'],
       lowercase: true,
       default: "paciente"
+    },
+    imageUrl: {
+      type: String
     }
   },
   {

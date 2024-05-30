@@ -13,9 +13,9 @@ const mensajeSchema = new Schema(
     text: {
       type: String
     },
-    isNew: {
+    leido: {
       type: Boolean,
-      default:true
+      default:false
     }
   },
   {

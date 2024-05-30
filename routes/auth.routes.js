@@ -64,7 +64,9 @@ router.post("/login", async (req, res, next) => {
     const payload = {
       _id: foundUser._id,
       email: foundUser.email,
-      username: foundUser.username
+      username: foundUser.username,
+      role: foundUser.role,
+      imageUrl: foundUser.imageUrl
     }
     const authToken = jwt.sign(
       payload, // CONTENIDO DEL TOKEN
@@ -80,12 +82,12 @@ router.post("/login", async (req, res, next) => {
 
 // GET "/api/auth/verify" =>
 router.get("/verify", isTokenValid, (req, res, next) => {
-  //console.log(req.payload) // usuario
+  console.log(req.payload) // usuario
   res.status(200).json({payload: req.payload})
 })
 
-// GET "/api/auth/perfil" =>
-router.get("/perfil", isTokenValid, async (req,res) => {
+// GET "/api/auth/perfil" => Obtener los datos del perfil
+router.get("/perfil/:userId", isTokenValid, async (req,res) => {
   try {
     const resp = await User.findById(req.payload._id)
     //console.log(resp)
@@ -95,6 +97,31 @@ router.get("/perfil", isTokenValid, async (req,res) => {
   }
 })
 
+// PATCH "/api/auth/perfil/editar"
+router.patch("/perfil/:userId", isTokenValid, async (req,res) => {
+  try {
+    await User.findByIdAndUpdate(req.payload._id, {
+      email: req.body.email,
+      username: req.body.username
+      /*password: req.body.password*/
+    })
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// PATCH "/api/auth/perfil/editar"
+router.patch("/perfil/:userId/foto-perfil", isTokenValid, async (req,res) => {
+  try {
+    await User.findByIdAndUpdate(req.payload._id, {
+      imageUrl: req.body.imageUrl
+    })
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})
 // GET "/api/auth/pacientes" =>
 router.get("/pacientes", isTokenValid, async (req,res) => {
   try {
