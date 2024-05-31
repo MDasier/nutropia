@@ -87,8 +87,8 @@ router.get("/verify", isTokenValid, (req, res, next) => {
 })
 
 
-
-// GET "/api/auth/pacientes" =>
+//!CREAR MIDDLERWARE DE "ROLE" DE USUARIO
+// GET "/api/auth/pacientes" => //! MOVER A PACIENTES.ROUTES 
 router.get("/pacientes", isTokenValid, async (req,res,next) => {
   try {
     if(req.payload.role==="nutri"){ 
