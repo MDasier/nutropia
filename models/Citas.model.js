@@ -4,7 +4,7 @@ const citasSchema = new Schema(
   {
     estado: {
       type: String,
-      enum: ['activa','realizada','cancelada']
+      enum: ['pendiente','realizada']
     },
     fecha: {
       type: Date

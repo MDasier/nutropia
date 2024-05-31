@@ -3,13 +3,13 @@ const { Schema, model } = require("mongoose");
 const dietaSchema = new Schema(
   {
     tipo: {
-      type: String,
+      type: [String],
       enum: ['low-carb','lactose-free']
     },
     foods: {
       type: [String],
     },
-    recomendaciones: {
+    recomendacion: {
       type: String
     },
     nutricionista: {

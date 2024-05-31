@@ -1,12 +1,13 @@
-function comprobarRole (req,res,next) {
+function isNutriOrAdmin (req,res,next) {
 
-
-    //IF comprobar role con req.ALGO {next()}    
-
-    //ELSE res.status(401).json({errorMessage: "No tienes los permisos necesarios"})
+  if(req.payload.role==="admin" || req.payload.role==="nutri"){
+    next()
+  }else{
+    res.status(401).json({errorMessage: "No tienes los permisos necesarios"})
+  }
 
 }
   
 module.exports = {
-  comprobarRole
+  isNutriOrAdmin
 }

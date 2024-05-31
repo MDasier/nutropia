@@ -1,3 +1,4 @@
+const { isTokenValid } = require("../middlewares/auth.middlewares");
 const User = require("../models/User.model");
 const router = require("express").Router();
 
@@ -11,17 +12,22 @@ router.get("/", async (req,res,next)=>{
   }
 })
 
-//PATCH /api/usuarios/:userId
-router.patch("/:userId", async (req,res,next)=>{
+//PATCH /api/usuarios/:userId/:newRole
+router.patch("/:userId/:newRole", isTokenValid, async (req,res,next)=>{
+  const {newRole} = req.params
+  if(newRole!=="paciente" && newRole!=="invitado" && newRole!=="nutricionista"){
+    res.status(400).json("Valor de role no aceptado")
+  }
   try {
     await User.findByIdAndUpdate(req.params.userId, {
-      role: req.body.role,
-      nutricionista: req.body.nutricionista
+      role: newRole,
+      nutricionista: newRole==="paciente" ? req.payload._id : null
     })
     res.sendStatus(200)
   } catch (error) {
     next(error)
   }
+  
 })
 
 module.exports = router;

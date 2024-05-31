@@ -9,6 +9,10 @@ const planNutricionalSchema = new Schema(
     paciente: {
       type: Schema.Types.ObjectId, 
       ref:"User"
+    },
+    dieta: {
+      type: Schema.Types.ObjectId, 
+      ref:"Diet"
     }
   },
   {

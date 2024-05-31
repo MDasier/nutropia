@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const { isTokenValid } = require("../middlewares/auth.middlewares.js")
+const { isNutriOrAdmin } = require("../middlewares/role.middleware.js")
 
 // POST "/api/auth/signup" =>
 router.post("/signup", async (req, res, next) => {
@@ -87,15 +88,11 @@ router.get("/verify", isTokenValid, (req, res, next) => {
 })
 
 
-//!CREAR MIDDLERWARE DE "ROLE" DE USUARIO
 // GET "/api/auth/pacientes" => //! MOVER A PACIENTES.ROUTES 
-router.get("/pacientes", isTokenValid, async (req,res,next) => {
+router.get("/pacientes", isTokenValid, isNutriOrAdmin,async (req,res,next) => {
   try {
-    if(req.payload.role==="nutri"){ 
-      const listaPacientes = await User.find({nutricionista:req.payload._id,role:"paciente"})
-      res.json(listaPacientes)
-    }
-    
+    const listaPacientes = await User.find({nutricionista:req.payload._id,role:"paciente"})
+    res.json(listaPacientes)
   } catch (error) {
     next(error)
   }
