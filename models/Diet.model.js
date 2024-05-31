@@ -6,8 +6,11 @@ const dietaSchema = new Schema(
       type: [String],
       enum: ['low-carb','lactose-free']
     },
-    foods: {
-      type: [String],
+    menuSemana1: {
+      type: Schema.Types.Map
+    },
+    menuSemana2: {
+      type: Schema.Types.Map
     },
     recomendacion: {
       type: String

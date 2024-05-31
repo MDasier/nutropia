@@ -4,14 +4,18 @@ const { isTokenValid } = require("../middlewares/auth.middlewares.js")
 const { isNutriOrAdmin } = require("../middlewares/role.middleware.js")
 
 //GET "/api/citas"=> Listado de citas
-router.get("/", isTokenValid, async (req,res,next) => {
+router.get("/", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
     try {
-      const resp = await Citas.find()
+      const resp = await Citas.find({
+        estado:req.body.estado,
+        nutricionista:req.payload._id
+      })
       .populate("nutricionista")
       .populate("paciente")
       res.json(resp)      
     } catch (error) {
       next(error)
+      //res.status(500).json({ message: error.message })
     }
 })
 
@@ -19,11 +23,11 @@ router.get("/", isTokenValid, async (req,res,next) => {
 router.post("/nueva-cita", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
   try {
     await Citas.create({
-      /*
-      parametros || req.body 
-      */
+      nutricionista:req.payload._id,
+      paciente:req.body.paciente,
+      fecha:req.body.fecha
     })
-    res.status(201)      
+    res.sendStatus(201)      
   } catch (error) {
     next(error)
   }
