@@ -3,12 +3,26 @@ const router = require("express").Router();
 const { isTokenValid } = require("../middlewares/auth.middlewares.js")
 const { isNutriOrAdmin } = require("../middlewares/role.middleware.js")
 
-//GET "/api/plan-nutricional"
+
+//GET "/api/plan-nutricional/all"
+router.get("/all", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
+  try {
+    const resp = await Plan.find()
+    .populate("nutricionista")//.select("username")
+    .populate("paciente")//.select("username")
+    res.json(resp)
+    
+  } catch (error) {
+    next(error)
+  }
+})
+
+//GET "/api/plan-nutricional" => NUTRICIONISTA BUSCANDO TODOS LOS PLANES CON SU ID
 router.get("/", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
     try {
-      const resp = await Plan.find()
-      .populate("nutricionista")
-      .populate("paciente")
+      const resp = await Plan.find({nutricionista:req.payload._id})
+      .populate("nutricionista")//.select("username")
+      .populate("paciente")//.select("username")
       res.json(resp)
       
     } catch (error) {
@@ -16,7 +30,7 @@ router.get("/", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
     }
 })
 
-//POST "/api/plan-nutricional/new-plan"
+//POST "/api/plan-nutricional/new-plan"  => crea un plan nuevo
 router.post("/nuevo-plan", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
   try {
       await Plan.create({
@@ -29,7 +43,7 @@ router.post("/nuevo-plan", isTokenValid, isNutriOrAdmin, async (req,res,next) =>
   }
 })
 
-//PATCH "/api/plan-nutricional/:planId"
+//PATCH "/api/plan-nutricional/:planId" => asigna una dieta al plan
 router.patch("/:planId", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
   try {
       await Plan.findByIdAndUpdate(req.params.planId, {

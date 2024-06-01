@@ -1,5 +1,37 @@
 const { Schema, model } = require("mongoose");
 
+const menuDiarioSchema = new Schema({
+  desayuno: { type: String },
+  almuerzo: { type: String },
+  comida: { type: String },
+  merienda: { type: String },
+  cena: { type: String }
+})
+
+const menuSemanalSchema = new Schema({
+  lunes: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  martes: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  miercoles: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  jueves: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  viernes: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  sabado: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  },
+  domingo: { type: Schema.Types.Map,
+    of: menuDiarioSchema
+  }
+})
+
 const dietaSchema = new Schema(
   {
     tipo: {
@@ -7,10 +39,12 @@ const dietaSchema = new Schema(
       enum: ['low-carb','lactose-free']
     },
     menuSemana1: {
-      type: Schema.Types.Map
+      type: Schema.Types.Map,
+      of: menuSemanalSchema
     },
     menuSemana2: {
-      type: Schema.Types.Map
+      type: Schema.Types.Map,
+      of: menuSemanalSchema
     },
     recomendacion: {
       type: String

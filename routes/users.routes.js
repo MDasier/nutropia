@@ -5,7 +5,7 @@ const router = require("express").Router();
 //GET "/api/usuarios" => lista de usuarios
 router.get("/", async (req,res,next)=>{
   try {
-    const resp = await User.find()
+    const resp = await User.find({ role: { $in: ['invitado', 'paciente'] } })//!FALTA COMPROBAR
     res.status(200).json(resp)
   } catch (error) {
     next(error)
@@ -14,8 +14,8 @@ router.get("/", async (req,res,next)=>{
 
 //PATCH /api/usuarios/:userId/:newRole
 router.patch("/:userId/:newRole", isTokenValid, async (req,res,next)=>{
-  const {newRole} = req.params
-  if(newRole!=="paciente" && newRole!=="invitado" && newRole!=="nutricionista"){
+  const {newRole} = req.params //OBTENEMOS EL PARAMETRO DINAMICO ROLE
+  if(newRole!=="paciente" && newRole!=="invitado" && newRole!=="nutricionista"){ // Y SI QUIERE 'SER' ADMIN NO LE DEJAMOS 
     res.status(400).json("Valor de role no aceptado")
   }
   try {

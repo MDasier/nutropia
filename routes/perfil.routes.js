@@ -14,7 +14,7 @@ router.get("/:userId", isTokenValid, async (req,res,next) => {
     }
   })
   
-  // PATCH "/api/perfil/:userId"
+  // PATCH "/api/perfil/:userId" => cambiar nombre de perfil
   router.patch("/:userId", isTokenValid, async (req,res,next) => {
     try {
       await User.findByIdAndUpdate(req.payload._id, {
@@ -28,7 +28,7 @@ router.get("/:userId", isTokenValid, async (req,res,next) => {
     }
   })
   
-  // PATCH "/api/perfil/foto-perfil"
+  // PATCH "/api/perfil/foto-perfil" => cambiar foto de perfil
   router.patch("/:userId/foto-perfil", isTokenValid, async (req,res,next) => {
     try {
       await User.findByIdAndUpdate(req.payload._id, {

@@ -10,7 +10,7 @@ const mensajeSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref:"User"
     },
-    text: {
+    texto: {
       type: String
     },
     leido: {
