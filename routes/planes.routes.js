@@ -21,8 +21,8 @@ router.get("/all", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
 router.get("/", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
     try {
       const resp = await Plan.find({nutricionista:req.payload._id})
-      .populate("nutricionista")//.select("username")
-      .populate("paciente")//.select("username")
+      .populate("nutricionista","username")//.select("username")
+      .populate("paciente","username")//.select("username")
       res.json(resp)
       
     } catch (error) {

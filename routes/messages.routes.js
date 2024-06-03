@@ -46,4 +46,33 @@ router.get("/nuevos", isTokenValid, async (req,res,next) => {
     next(error)
   }
 })
+
+//POST "/api/mensajes/nuevo-mensaje" => crear nuevo mensaje
+router.post("/nuevo-mensaje", isTokenValid, async (req,res,next) => {
+  try {
+      await Mensajes.create({
+      emisor:req.payload._id,
+      receptor:req.body.receptor,
+      texto:req.body.texto,
+      leido:false
+    })
+    res.sendStatus(201) 
+     
+  } catch (error) {
+    next(error)
+  }
+})
+
+//POST "/api/mensajes/nuevo-mensaje" => crear nuevo mensaje
+router.patch("/mensaje-leido", isTokenValid, async (req,res,next) => {
+  try {
+      await Mensajes.findByIdAndUpdate(req.body.id,{
+      leido:true
+    })
+    res.sendStatus(201) 
+     
+  } catch (error) {
+    next(error)
+  }
+})
 module.exports = router;

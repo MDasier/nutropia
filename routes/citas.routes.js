@@ -12,15 +12,16 @@ router.get("/:role", isTokenValid, async (req,res,next) => {
           estado:'pendiente',        
           nutricionista:req.payload._id
         })
+        //.select({})
         /*.populate("nutricionista").select("username")*/
-        .populate("paciente")//!.select("username")//CONTROLAR LO QUE SE MUESTRA
+        .populate("paciente","username")//!.select("username")//CONTROLAR LO QUE SE MUESTRA
         res.json(resp)   
       }else if(req.params.role==="paciente"){
         const resp = await Citas.find({
           estado:'pendiente',        
           paciente:req.payload._id
         })
-        .populate("nutricionista")//!.select("username")//CONTROLAR LO QUE SE MUESTRA
+        .populate("nutricionista","username")//!.select("username")//CONTROLAR LO QUE SE MUESTRA
         /*.populate("paciente")*/
         res.json(resp)   
       }
