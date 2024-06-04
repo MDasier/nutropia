@@ -5,7 +5,7 @@ const router = require("express").Router();
 //GET "/api/usuarios" => lista de usuarios
 router.get("/", async (req,res,next)=>{
   try {
-    const resp = await User.find({ role: { $in: ['invitado', 'paciente'] } })//!FALTA COMPROBAR
+    const resp = await User.find({ role: { $in: ['invitado', 'paciente'] } })
     res.status(200).json(resp)
   } catch (error) {
     next(error)
