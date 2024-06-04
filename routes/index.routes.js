@@ -29,4 +29,7 @@ router.use("/citas", citasRouter)//rutas para las citas/agenda
 const uploadRoutes = require("./upload.routes");
 router.use("/upload", uploadRoutes);//cloudinary
 
+const passwordRoutes = require("./password.routes");
+router.use("/password", passwordRoutes);//nodemailer||reset-forgot password
+
 module.exports = router;

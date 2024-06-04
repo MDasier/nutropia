@@ -63,7 +63,7 @@ router.post("/nuevo-mensaje", isTokenValid, async (req,res,next) => {
   }
 })
 
-//POST "/api/mensajes/nuevo-mensaje" => crear nuevo mensaje
+//POST "/api/mensajes/mensaje-leido" => marcar mensaje como leido
 router.patch("/mensaje-leido", isTokenValid, async (req,res,next) => {
   try {
       await Mensajes.findByIdAndUpdate(req.body.id,{

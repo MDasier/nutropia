@@ -77,4 +77,17 @@ router.post("/nueva-cita", isTokenValid, isNutriOrAdmin, async (req,res,next) =>
   }
 })
 
+//POST "/api/citas/cita-realizada"=> Crear cita
+//*Cita nueva creada solo por nutricionistas
+router.patch("/cita-realizada", isTokenValid, isNutriOrAdmin, async (req,res,next) => {
+  try {
+    await Citas.findByIdAndUpdate(req.body.id,{
+      estado:"realizada"
+    })
+    res.sendStatus(201)      
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router;
