@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 const { isTokenValid } = require("../middlewares/auth.middlewares.js")
 
-// GET "/api/perfil" => Obtener los datos del perfil
+// GET "/api/perfil/:userId" => Obtener los datos del perfil
 router.get("/:userId", isTokenValid, async (req,res,next) => {
     try {
       const resp = await User.findById(req.payload._id)
