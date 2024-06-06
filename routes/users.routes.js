@@ -2,15 +2,27 @@ const { isTokenValid } = require("../middlewares/auth.middlewares");
 const User = require("../models/User.model");
 const router = require("express").Router();
 
-//GET "/api/usuarios" => lista de usuarios
-router.get("/", async (req,res,next)=>{
-  try {
-    const resp = await User.find({ role: { $in: ['invitado', 'paciente'] } })
-    res.status(200).json(resp)
-  } catch (error) {
-    next(error)
+//GET "/api/usuarios/:role" => lista de usuarios
+router.get("/:role", async (req,res,next)=>{
+  if(req.params.role==='nutri'){
+    try {
+      const resp = await User.find({ role: { $in: ['invitado', 'paciente', 'nutri'] } })
+      res.status(200).json(resp)
+    } catch (error) {
+      next(error)
+    }
   }
+  if(req.params.role==='paciente'){
+    try {
+      const resp = await User.find({ role: { $in: ['invitado', 'paciente'] } })
+      res.status(200).json(resp)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 })
+
 
 //PATCH /api/usuarios/:userId/:newRole
 router.patch("/:userId/:newRole", isTokenValid, async (req,res,next)=>{
