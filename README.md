@@ -208,43 +208,43 @@ const dietaSchema = new Schema(
 ## API Endpoints (backend routes)
 
 ## AUTH ROUTES
-// POST "/api/auth/signup" => REQ {username, email, password}
-// POST "/api/auth/login" => REQ {email, password}
-// GET "/api/auth/verify" =>
-// GET "/api/auth/pacientes" (In the future: "/api/pacientes")=> 
+### // POST "/api/auth/signup" => REQ {username, email, password}
+### // POST "/api/auth/login" => REQ {email, password}
+### // GET "/api/auth/verify" =>
+### // GET "/api/auth/pacientes" (In the future: "/api/pacientes")=> 
 
 ## USER ROUTES
-//GET "/api/usuarios/:role" => All the users
-//PATCH "/api/usuarios/:userId/:newRole" => Edit the 'role' of a user
+### //GET "/api/usuarios/:role" => All the users
+### //PATCH "/api/usuarios/:userId/:newRole" => Edit the 'role' of a user
 
 ## FOOD ROUTES
-//GET "/api/alimentos" => All foods
-//GET "/api/alimentos/:nombre" => One food by name
+### //GET "/api/alimentos" => All foods
+### //GET "/api/alimentos/:nombre" => One food by name
 
 ## DATES ROUTES
-//GET "/api/citas/:role"=> 
-//GET "/api/citas/:role/:fecha"=> 
-//POST "/api/citas/nueva-cita"=> Crear cita
-//PATCH "/api/citas/cita-realizada"=> Crear cita
+### //GET "/api/citas/:role"=> 
+### //GET "/api/citas/:role/:fecha"=> 
+### //POST "/api/citas/nueva-cita"=> Crear cita
+### //PATCH "/api/citas/cita-realizada"=> Crear cita
 
 ## MESSAGES ROUTES
-//GET "/api/mensajes/enviados" =>
-//GET "/api/mensajes/recibidos" =>
-//GET "/api/mensajes/nuevos" =>
-//POST "/api/mensajes/nuevo-mensaje" =>
-//POST "/api/mensajes/mensaje-leido" =>
+### //GET "/api/mensajes/enviados" =>
+### //GET "/api/mensajes/recibidos" =>
+### //GET "/api/mensajes/nuevos" =>
+### //POST "/api/mensajes/nuevo-mensaje" =>
+### //POST "/api/mensajes/mensaje-leido" =>
 
 ## PASSWORD RESTET ROUTES
-POST "/api/password/forget-password" =>
-POST "/api/password/reset-password/:token" =>
+### POST "/api/password/forget-password" =>
+### POST "/api/password/reset-password/:token" =>
 
 ## PERFIL ROUTES
-// GET "/api/perfil/:userId" => Get data from user-profile
-// PATCH "/api/perfil/:userId" => Edit username
-// PATCH "/api/perfil/foto-perfil" => Edit profile-image
+### // GET "/api/perfil/:userId" => Get data from user-profile
+### // PATCH "/api/perfil/:userId" => Edit username
+### // PATCH "/api/perfil/foto-perfil" => Edit profile-image
 
 ## UPLOAD ROUTES(Cloudinary)
-POST "/api/upload" => To upload images to cloudinary folder
+### POST "/api/upload" => To upload images to cloudinary folder
 
 
 ## Links
