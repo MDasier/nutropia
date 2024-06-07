@@ -246,12 +246,11 @@ const dietaSchema = new Schema(
 ## UPLOAD ROUTES(Cloudinary)
 ### POST "/api/upload" => To upload images to cloudinary folder
 
-
-## Links
 ### Project
+[Repository Link Client](https://github.com/MDasier/client-nutropia)
+[Repository Link Server](https://github.com/MDasier/server-nutropia)
 
-[Repository Link Client]([www.your-github-url-here.com](https://github.com/MDasier/client-nutropia))
-
-[Repository Link Server]([www.your-github-url-here.com](https://github.com/MDasier/server-nutropia))
+### Slides
+[Slides Link](https://docs.google.com/presentation/d/1Bet4KJOQ9EM7SXLSm5I0N1cHcoJFe-wz4bcz9D3E3Ng/edit?usp=sharing)
 
 [Deploy Link]([www.your-deploy-url-here.com](https://nutropia.netlify.app))
