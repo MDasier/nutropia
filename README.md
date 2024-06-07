@@ -252,5 +252,3 @@ const dietaSchema = new Schema(
 
 ### Slides
 [Slides Link](https://docs.google.com/presentation/d/1Bet4KJOQ9EM7SXLSm5I0N1cHcoJFe-wz4bcz9D3E3Ng/edit?usp=sharing)
-
-[Deploy Link]([www.your-deploy-url-here.com](https://nutropia.netlify.app))
